@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\gcucchia\\Downloads\\GipsyServices v.1.2025.8.1.json\" \"C:\\Users\\gcucchia\\Downloads\\output_catalogo.xlsx\"",
+      "workingDirectory": "C:\\Users\\gcucchia\\Downloads"
+    }
+  }
+}
