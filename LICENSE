@@ -1,31 +1,26 @@
-GNU AFFERO GENERAL PUBLIC LICENSE
-                       Version 3, 19 November 2007
+Copyright (c) 2025 Glauco Cucchiar
 
-Copyright (C) 2025 Glauco Cucchiar
+This software is licensed under a custom license inspired by the GNU Affero General Public License v3.0 (AGPL-3.0), with additional restrictions.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Permission is granted to use, modify, and distribute this software under the following conditions:
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+1. Non-Commercial Use Only:
+   - The software, in original or modified form, may only be used in non-commercial contexts, including but not limited to:
+     - Personal projects
+     - Non-profit organizations
+     - ONLUS
+     - Public research institutions
+   - Any use by commercial entities, for-profit organizations, or for commercial purposes is strictly prohibited without prior written authorization from the author.
 
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/> or [AGPL3](./AGPL3).
+2. Network Use:
+   - If the software is modified and used to provide services over a network (e.g., web applications, APIs), the complete source code of the modified version must be made available to all users of the service.
 
-#Additional Anti-Commercial Clause:
+3. Copyleft:
+   - Any redistribution of the software, with or without modifications, must retain this license and all its terms.
+   - The source code must be made available along with any distributed version of the software.
 
-The use of this software, in its original or modified form, is strictly prohibited in commercial contexts without prior written authorization from the author.
+4. No Warranty:
+   - THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+   - IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Permitted usage includes:
-- Personal projects
-- Non-profit organizations
-- ONLUS
-- Public research institutions
-
-Any use by companies, for-profit entities, or for commercial purposes is forbidden unless explicitly authorized in writing by the author.
-
-For commercial licensing inquiries, please contact: cpsglauco@yahoo.it
+For commercial licensing inquiries, please contact the author directly.
