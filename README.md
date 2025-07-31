@@ -21,20 +21,27 @@ The goal of this tool is to simplify the process of documenting APIs by extracti
 
 ---
 
-## 📄 License
 
-This project is distributed under the **GNU GPL v3.0** license with an **additional anti-commercial clause**.
+## 📄 License
+This project is released under a **custom license inspired by the GNU Affero General Public License v3 (AGPL-3.0)**, with the following conditions:
 
 ### ✅ Permitted Use
-- Use, modification, and redistribution of the code are allowed **exclusively in non-commercial contexts**, such as:
-- Personal projects
-- Non-profit organizations
-- Charitable organizations (ONLUS)
-- Public research institutions
+- Use, modification, and redistribution are allowed **only in non-commercial contexts**, such as:
+  - Personal projects
+  - Non-profit organizations
+  - Charitable entities (ONLUS)
+  - Public research institutions
 
 ### 🚫 Prohibited Use
-- **Use of the software, whether original or modified, in commercial contexts is not allowed** without **written authorization from the author**.
-- Any use by companies, for-profit entities, or for commercial purposes is strictly prohibited.
+- **Commercial use of the software, original or modified, is strictly prohibited** without **prior written authorization from the author**.
+- This includes use by companies, for-profit entities, or in any revenue-generating context.
+
+### 🌐 Network Use Clause (AGPL-like)
+- If the software is used to provide services over a network (e.g., web applications, APIs), the complete source code **must be made available** to users of the service.
+
+### ⚠️ Disclaimer
+- The software is provided **"as is"**, without any warranty of any kind, express or implied.
+- The author is **not liable** for any damages or issues arising from the use of this software.
 
 ### 📬 Commercial Requests
 To obtain a commercial license or written authorization, please contact the author at the address provided in the [LICENSE](./LICENSE) file.
