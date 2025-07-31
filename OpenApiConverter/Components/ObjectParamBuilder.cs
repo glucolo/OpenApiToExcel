@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace OpenApiConverter.Components
 {
@@ -24,7 +25,7 @@ namespace OpenApiConverter.Components
                 var refStr = schema["$ref"].ToString();
                 if (visitedRefs.Contains(refStr)) return null; // Avoid infinite recursion
                 visitedRefs.Add(refStr);
-                var defName = refStr.Split('/').Last();
+                var defName = HttpUtility.UrlDecode( refStr.Split('/').Last());
                 def = definitions[defName] as JObject;
                 if (def == null) return null;
             }
