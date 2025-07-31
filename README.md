@@ -44,7 +44,7 @@ This project is released under a **custom license inspired by the GNU Affero Gen
 - The author is **not liable** for any damages or issues arising from the use of this software.
 
 ### 📬 Commercial Requests
-To obtain a commercial license or written authorization, please contact the author at the address provided in the [LICENSE](./LICENSE) file.
+To obtain a commercial license or written authorization, please contact the author.
 
 ---
 
