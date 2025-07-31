@@ -19,6 +19,7 @@ The goal of this tool is to simplify the process of documenting APIs by extracti
 - Share API structure with non-developers in a familiar Excel format  
 - Facilitate API audits and compliance checks
 
+---
 
 ## 📄 License
 
@@ -43,6 +44,3 @@ To obtain a commercial license or written authorization, please contact the auth
 For more details, refer to the [LICENSE](./LICENSE) file included in this repository.
 
 
----
-
-Per maggiori dettagli, consulta il file [LICENSE](./LICENSE) incluso in questo repository.
