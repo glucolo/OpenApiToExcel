@@ -1,0 +1,3 @@
+#Microsoft.OpenApi
+Utilizzare questa libreria per convertire il file .json/.yaml in un Model .NET
+
