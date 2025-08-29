@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\gcucchia\\Downloads\\GipsyAPI_v1.2025.12.1.json\" \"C:\\Users\\gcucchia\\Downloads\\output_catalogo.xlsx\"",
+      "commandLineArgs": "\"C:\\Users\\gcucchia\\Downloads\\GipsyAPI_v1.2025.13.1.json\" \"C:\\Users\\gcucchia\\Downloads\\output_catalogo_13.xlsx\"",
       "workingDirectory": "C:\\Users\\gcucchia\\Downloads"
     }
   }

@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.OpenApi;
+using Microsoft.OpenApi.Reader;
+using Newtonsoft.Json.Linq;
 using OpenApiConverter.Components;
 using OpenApiConverter.Models;
 using System.Runtime.CompilerServices;
 
 if (args.Length < 2)
 {
-    Console.WriteLine("Usage: SwaggerToExcelOOPWithInheritance <swagger.json> <output.xlsx>");
+    Console.WriteLine("Usage: SwaggerToExcel.exe <swagger.json> <output.xlsx>");
     return;
 }
 
@@ -13,10 +15,12 @@ var swaggerPath = args[0];
 var outputPath = args[1];
 var swagger = JObject.Parse(File.ReadAllText(swaggerPath));
 var rowObjs = ProcessJson(swagger);
-ExcelConverter.Export(outputPath, rowObjs, "Gipsy API");
 
+var doc = ProcessFile(swaggerPath);
+var outputString = await doc.SerializeAsJsonAsync(OpenApiSpecVersion.OpenApi2_0);
+File.WriteAllText(string.Concat(swaggerPath, ".txt"), outputString);
 
-
+//ExcelConverter.Export(outputPath, rowObjs, "Gipsy API");
 
 static IList<ParamRow> ProcessJson(JObject? swagger)
 {
@@ -95,3 +99,72 @@ static IList<ParamRow> ProcessJson(JObject? swagger)
 
     return rows;
 }
+
+static OpenApiDocument ProcessFile(string filePath)
+{
+    if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+        throw new FileNotFoundException($"File not found: {filePath}");
+
+    var content = File.OpenRead(filePath);
+    var apiDoc = OpenApiDocument.LoadAsync(content, OpenApiConstants.Json).ConfigureAwait(false).GetAwaiter().GetResult();
+
+    return apiDoc.Document;
+}
+
+
+var newDoc = new OpenApiDocument
+{
+    Info = doc.Info,
+    Servers = doc.Servers,
+    Paths = new OpenApiPaths
+    {
+        ["/pets"] = new OpenApiPathItem
+        {
+            Operations = new Dictionary<HttpMethod, OpenApiOperation>
+            {
+                [HttpMethod.Post] = new OpenApiOperation
+                {
+                    OperationId = "getPets",
+                    Summary = "Get all pets",
+                    Description = "Returns a list of all pets in the system.",
+                    Parameters = new List<IOpenApiParameter>
+                    {
+                        new OpenApiParameter
+                        {
+                            Name = "sort",
+                            Description = "Maximum number of pets to return",
+                            Required = false,
+                            Schema = new OpenApiSchema
+                            {
+                                DynamicRef = "Whats????"
+                            }
+                        }
+                    },
+                    Responses = new OpenApiResponses
+                    {
+                        ["200"] = new OpenApiResponse
+                        {
+                            Description = "A list of pets",
+                            Content = new Dictionary<string, OpenApiMediaType>
+                            {
+                                ["application/json"] = new OpenApiMediaType
+                                {
+                                    Schema = new OpenApiSchema
+                                    {
+                                        Type = JsonSchemaType.Object,
+                                        Items = new OpenApiSchema { Type = JsonSchemaType.Object }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    Components = doc.Components,
+    Tags = doc.Tags,
+    ExternalDocs = doc.ExternalDocs
+};
+
+
