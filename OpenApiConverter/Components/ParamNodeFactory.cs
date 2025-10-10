@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace OpenApiConverter.Components
 {
+    /// <summary>
+    /// Factory dei nodi di parametro - Compatibile con Swagger 2.0
+    /// </summary>
     public static class ParamNodeFactory
     {
         private static readonly List<IParamBuilder> _builders = new()

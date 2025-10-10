@@ -10,6 +10,9 @@ using System.Web;
 
 namespace OpenApiConverter.Components
 {
+    /// <summary>
+    /// Builder per un nodo di tipo Object - Compatibile con Swagger 2.0
+    /// </summary>
     internal class ObjectParamBuilder : IParamBuilder
     {
         public bool CanHandle(JToken schema)

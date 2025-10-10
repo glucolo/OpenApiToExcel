@@ -1,97 +1,63 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.OpenApi;
+using Microsoft.OpenApi.Reader;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OpenApiConverter;
 using OpenApiConverter.Components;
 using OpenApiConverter.Models;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 if (args.Length < 2)
 {
-    Console.WriteLine("Usage: SwaggerToExcelOOPWithInheritance <swagger.json> <output.xlsx>");
+    Console.WriteLine("Usage: SwaggerToExcel.exe <swagger.json> <output.xlsx>");
     return;
 }
+
+
 
 var swaggerPath = args[0];
 var outputPath = args[1];
 var swagger = JObject.Parse(File.ReadAllText(swaggerPath));
-var rowObjs = ProcessJson(swagger);
-ExcelConverter.Export(outputPath, rowObjs, "Gipsy API");
 
+var filename = Path.GetFileNameWithoutExtension(swaggerPath);
 
+Console.WriteLine("Loading OpenApi/Swagger definition...");
+// Load swagger to OpenApiDocument
+var doc = LoadToOpenApiDocument(swaggerPath);
+Console.WriteLine("Writing OpenApi 2/3/3.1 definition...");
+File.WriteAllText($"C:\\temp\\openapi_2.0_{filename}.json", await doc.SerializeAsJsonAsync(OpenApiSpecVersion.OpenApi2_0));
+File.WriteAllText($"C:\\temp\\openapi_3.0_{filename}.json", await doc.SerializeAsJsonAsync(OpenApiSpecVersion.OpenApi3_0));
+File.WriteAllText($"C:\\temp\\openapi_3.1_{filename}.json", await doc.SerializeAsJsonAsync(OpenApiSpecVersion.OpenApi3_1));
 
-
-static IList<ParamRow> ProcessJson(JObject? swagger)
+using (var wb = ExcelConverter.CreateExcelWorkbook())
 {
-    var rows = new List<ParamRow>();
-    var definitions = swagger["definitions"] as JObject ?? new JObject();
-    var visitor = new ParamRowVisitor();
-
-    foreach (var path in swagger["paths"])
-    {
-        foreach (var method in (path.First as JObject).Properties())
-        {
-            var info = method.Value;
-            string service = "";
-            if (info["operationId"] != null && info["operationId"].ToString().Contains("_"))
-                service = info["operationId"].ToString().Split('_', 2)[1];
-
-            var parameters = info["parameters"] as JArray ?? new JArray();
-            var sectionRows = new List<ParamRow>();
-
-            foreach (var param in parameters)
-            {
-                ParamNode node = null;
-                if (param["schema"] != null)
-                {
-                    node = ParamNodeFactory.Build(
-                        param["name"]?.ToString(),
-                        param["schema"],
-                        definitions,
-                        new HashSet<string>(),
-                        param["required"]?.ToObject<bool>() ?? false,
-                        param["description"]?.ToString()
-                    );
-                }
-                else if (param["type"]?.ToString() == "array" && param["items"] != null)
-                {
-                    node = ParamNodeFactory.Build(
-                        param["name"]?.ToString(),
-                        param,
-                        definitions,
-                        new HashSet<string>(),
-                        param["required"]?.ToObject<bool>() ?? false,
-                        param["description"]?.ToString()
-                    );
-                }
-                else
-                {
-                    node = new SimpleParam(
-                        param["name"]?.ToString(),
-                        param["description"]?.ToString() ?? "",
-                        param["required"]?.ToObject<bool>() ?? false,
-                        param["type"]?.ToString() ?? "",
-                        param["format"]?.ToString() ?? "",
-                        param["format"]?.ToString() ?? ""
-                    );
-                }
-                if (node != null)
-                {
-                    var ctx = new ParamContext()
-                    {
-                        Service = service,
-                        InputType = param["in"]?.ToString() ?? "",
-                        ParentWSField = "",
-                        ParentRequired = param["required"]?.ToObject<bool>() ?? false,
-                        ParentFormat = param["type"]?.ToString() ?? "",
-                        ParentFormat2 = param["format"]?.ToString() ?? "",
-                        ParentDescription = param["description"]?.ToString() ?? "",
-                        ParentName = param["name"]?.ToString() ?? ""
-                    };
-                    node.Accept(visitor, ctx, sectionRows);
-                }
-            }
-            rows.AddRange(sectionRows);
-            rows.Add(new ParamRow()); // Riga vuota tra servizi
-        }
-    }
-
-    return rows;
+    Console.WriteLine("Creating operations sheet...");
+    ExcelConverter.GenerateEndpointsSheet(doc, wb);
+    Console.WriteLine("Creating Requests detail sheet...");
+    ExcelConverter.GenerateRequestsSheet(doc, wb);
+    //ExcelConverter.GenerateParamsSheetFromOpenapi2(swagger, wb);
+    Console.WriteLine("Creating Responses detail sheet...");
+    ExcelConverter.GenerateResponsesSheets(doc, wb);
+    Console.WriteLine("Saving...");
+    ExcelConverter.SaveExcelWorkbook(wb, outputPath);
+    Console.WriteLine($"Excel created at {outputPath}");
+    return;
 }
+
+
+static OpenApiDocument LoadToOpenApiDocument(string filePath)
+{
+    if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+        throw new FileNotFoundException($"File not found: {filePath}");
+
+    var content = File.OpenRead(filePath);
+    var apiDoc = OpenApiDocument.LoadAsync(content, OpenApiConstants.Json).ConfigureAwait(false).GetAwaiter().GetResult();
+
+    return apiDoc.Document;
+}
+
+
+
+

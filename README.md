@@ -1,16 +1,16 @@
-# 📘 API Documentation Generator from Swagger 2.0
+# 📘 Excel documentation generator for Web APIs
 
-This tool automates the creation of API documentation by converting a Swagger 2.0 (OpenAPI) JSON specification into a structured Excel file. It is designed to help developers, technical writers, and API consumers quickly visualize and understand the available endpoints in a RESTful API.
+This tool automates the creation of Web API documentation by converting its OpenAPI specification (JSON) into a structured Excel file. It is designed to help developers, technical writers, and RESTFul Web API users quickly visualize and understand available endpoints.
 
 ## 🎯 Purpose
 
-The goal of this tool is to simplify the process of documenting APIs by extracting all relevant information from a Swagger 2.0 specification and organizing it into a human-readable Excel spreadsheet.
+The goal of this tool is to simplify the process of documenting APIs by extracting all relevant information from a OpenApi specification and organizing it into a human-readable Excel spreadsheet.
 
 ## 🔧 Features
 
-- Parses Swagger 2.0 JSON files  
-- Extracts endpoint paths, HTTP methods, parameters, and descriptions  (TODO: responses)
-- Outputs a well-formatted Excel file with separate sections for endpoints, parameters (TODO: and response codes)
+- Parses OpenApi 2.0/3/3.1 JSON files  
+- Extracts endpoint paths, HTTP methods, Request parameters, Response object
+- Outputs a well-formatted Excel file with separate sheets for endpoints, Request parameters, Response objects
 - Useful for technical documentation, API reviews, and onboarding new developers
 
 ## 📈 Use Cases
@@ -46,8 +46,26 @@ This project is released under a **custom license inspired by the GNU Affero Gen
 ### 📬 Commercial Requests
 To obtain a commercial license or written authorization, please contact the author.
 
+For more details, refer to the [LICENSE](./LICENSE) file included in this repository.
+
+
 ---
 
-For more details, refer to the [LICENSE](./LICENSE) file included in this repository.
+
+## 📝 Changelog
+
+### v1.1.0
+- Improved Excel formatting for better readability
+- Added Microsoft.OpenApi v2.0.0 library for enhanced parsing capabilities
+- Added support for additional Swagger/OpenAPI features
+- Added response object extraction
+- Bug fixes and performance improvements
+
+### v1.0.0
+- Initial release
+- Parses Swagger/OpenAPI 2.0/3/3.1 JSON files
+- Extracts endpoint paths, HTTP methods, request parameters
+- Outputs a well-formatted Excel file with separate sheets for endpoints, request parameters
+
 
 
