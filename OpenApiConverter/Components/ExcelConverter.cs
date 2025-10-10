@@ -35,7 +35,7 @@ namespace OpenApiConverter.Components
 
         public static void GenerateRequestsSheet(OpenApiDocument document, XLWorkbook workbook)
         {
-            var worksheet = workbook.Worksheets.Add("Requests Openapi");
+            var worksheet = workbook.Worksheets.Add("Requests");
             var visitor = new RequestsVisitor();
             document.Accept(visitor);
             var rows = visitor.GetRequests();
@@ -45,7 +45,7 @@ namespace OpenApiConverter.Components
 
         public static void GenerateResponsesSheets(OpenApiDocument doc, XLWorkbook wb)
         {
-            var worksheet = wb.Worksheets.Add("Responses Gipsy");
+            var worksheet = wb.Worksheets.Add("Responses");
             var visitor = new ResponsesVisitor();
             doc.Accept(visitor);
             var rows = visitor.GetResponses();
