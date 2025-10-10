@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace OpenApiConverter.Components
 {
+    /// <summary>
+    /// Builder per un nodo di tipo Array - Compatibile con Swagger 2.0
+    /// </summary>
     internal class ArrayParamBuilder : IParamBuilder
     {
         public bool CanHandle(JToken schema) => schema["type"]?.ToString() == "array";
